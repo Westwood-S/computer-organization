@@ -17,33 +17,33 @@ endline:       .ascii "\n"
                       
                .text
 main:     
-Loop:          li $v0,12      # ¶ÁÈëÒ»¸ö×Ö·û
+Loop:          li $v0,12      # è¯»å…¥ä¸€ä¸ªå­—ç¬¦
                syscall        
-               move $t0,$v0   # ÏÂÃæÓÖÒªsystem call ÏÈ°Ñ¶ÁÈëµÄ×Ö·û´æÆğÀ´
+               move $t0,$v0   # ä¸‹é¢åˆè¦system call å…ˆæŠŠè¯»å…¥çš„å­—ç¬¦å­˜èµ·æ¥
 
-               la $a0,endline     # ÁíÆğÒ»ĞĞ
-               li $v0,4           # Êä³ö×Ö·û´®
+               la $a0,endline     # å¦èµ·ä¸€è¡Œ
+               li $v0,4           # è¾“å‡ºå­—ç¬¦ä¸²
                syscall         
-               move $v0,$t0       # ¶ÁÈë×Ö·û´æ»Ø$v0±¸ÓÃ
+               move $v0,$t0       # è¯»å…¥å­—ç¬¦å­˜å›$v0å¤‡ç”¨
 
                sub $t0,$v0,'?'
-               beqz $t0,End        # ÈôÎª £¿ ½áÊø³ÌĞò
+               beqz $t0,End        # è‹¥ä¸º ï¼Ÿ ç»“æŸç¨‹åº
                blt $v0,'0',Others  # < 0
                ble $v0,'9',Num     # 0 - 9
-               blt $v0,'A',Others  # 9 - A Ö®¼ä ¿ªÇø¼ä
+               blt $v0,'A',Others  # 9 - A ä¹‹é—´ å¼€åŒºé—´
                ble $v0,'Z',Cap     # A - Z
-               blt $v0,'a',Others  # Z - a Ö®¼ä ¿ªÇø¼ä
+               blt $v0,'a',Others  # Z - a ä¹‹é—´ å¼€åŒºé—´
                ble $v0,'z',Low     # a - z
                b Others
                
 Num:           sub $t0,$v0,'0      
-               sll $t0,$t0,2         # Ò»¸ö×ÖÕ¼4¸ö×Ö½Ú ×óÒÆ2Î»
-               la $t1,Number_offset  # $t1´æ Number_offset µÄµØÖ·
-               add $t0,$t0,$t1       # $t0¶¨Î»µ½ÄÄÒ»Î»Æ«ÒÆÁ¿
-               lw $t0,($t0)          # $t0´æ¶ÔÓ¦×Ö·û´®µÄÆ«ÒÆÁ¿
-               la $t1,Number         # $t1´æNumberµÄµØÖ·
-               add $a0,$t0,$t1       # $a0´æ´ıÊä³ö×Ö·û´®µÄµØÖ·
-               li $v0,4              # Êä³ö×Ö·û´®
+               sll $t0,$t0,2         # ä¸€ä¸ªå­—å 4ä¸ªå­—èŠ‚ å·¦ç§»2ä½
+               la $t1,Number_offset  # $t1å­˜ Number_offset çš„åœ°å€
+               add $t0,$t0,$t1       # $t0å®šä½åˆ°å“ªä¸€ä½åç§»é‡
+               lw $t0,($t0)          # $t0å­˜å¯¹åº”å­—ç¬¦ä¸²çš„åç§»é‡
+               la $t1,Number         # $t1å­˜Numberçš„åœ°å€
+               add $a0,$t0,$t1       # $a0å­˜å¾…è¾“å‡ºå­—ç¬¦ä¸²çš„åœ°å€
+               li $v0,4              # è¾“å‡ºå­—ç¬¦ä¸²
                syscall
                b Loop
                
@@ -69,8 +69,8 @@ Low:           sub $t0,$v0,'a'
                syscall
                b Loop        
                
-Others:        li $a0,'*'     # ÆäËû×Ö·ûÊä³ö *
-               li $v0,11      # Êä³ö×Ö·û
+Others:        li $a0,'*'     # å…¶ä»–å­—ç¬¦è¾“å‡º *
+               li $v0,11      # è¾“å‡ºå­—ç¬¦
                syscall
 
                la $a0,endline     
@@ -79,7 +79,7 @@ Others:        li $a0,'*'     # ÆäËû×Ö·ûÊä³ö *
 
                b Loop
 
-End:           li $v0,10      # ÍË³ö³ÌĞò
+End:           li $v0,10      # é€€å‡ºç¨‹åº
                syscall                              
                
                  
